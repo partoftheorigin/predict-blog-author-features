@@ -2,7 +2,10 @@
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
 ## Algorithms
-[Multinomial Naive Bayes]()
+[Multinomial Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes)
+[Logistic Regression](http://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)
+[Bernoulli Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes)
+[Random Forests](http://scikit-learn.org/stable/modules/ensemble.html#forest)
 [Stochastic Gradient Descent](http://scikit-learn.org/stable/modules/sgd.html#sgd)
 
 ## Dataset
