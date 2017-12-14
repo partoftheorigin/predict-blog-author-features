@@ -8,6 +8,17 @@ Predicts gender, age, label, and zodiac sign of the author from the given text.
 * [Random Forests](http://scikit-learn.org/stable/modules/ensemble.html#forest)
 * [Stochastic Gradient Descent](http://scikit-learn.org/stable/modules/sgd.html#sgd)
 
+### Accuracy
+Algorithm            | Label               | Gender              | Age                 | Zodiac
+-------------------- | ------------------  | ------------------- | ------------------  | --------------------
+Logistic Regression  | tf-0.367, cv-0.371* | tf-0.527, cv-0.571* | tf-0.145, cv-0.148  | tf-0.095, cv-0.101*
+MultinomialNB        | tf-0.367, cv-0.354  | tf-0.568, cv-0.570  | tf-0.149*, cv-0.137 | tf-0.099, cv-0.101*
+Random Forests       | tf-0.354, cv-0.326  | tf-0.520, cv-0.560  | tf-0.126, cv-0.141  | tf-0.094, cv-0.096
+BernoulliNB          | tf-0.322, cv-0.322  | tf-0.556, cv-0.556  | tf-0.116, cv-0.116  | tf-0.099, cv-0.099
+SGDClassifier        | tf-0.361, cv-0.334  | tf-0.504, cv-0.563  | tf-0.073, cv-0.072  | tf-0.076, cv-0.079
+
+tf = TfidfVectorizer, cv=CountVectorizer, values represent accuracy score.
+
 ## Dataset
 ### The Blog Authorship Corpus
 The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers gathered from blogger.com in August 2004. The corpus incorporates a total of 681,288 posts and over 140 million words - or approximately 35 posts and 7250 words per person.  
