@@ -1,6 +1,7 @@
 # Contextual Classification of Short Text
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
+## Dataset
 ### The Blog Authorship Corpus
 The Blog Authorship Corpus consists of the collected posts of 19,320 bloggers gathered from blogger.com in August 2004. The corpus incorporates a total of 681,288 posts and over 140 million words - or approximately 35 posts and 7250 words per person.  
 
@@ -9,7 +10,7 @@ Each blog is presented as a separate file, the name of which indicates a blogger
 All bloggers included in the corpus fall into one of three age groups:
 * 8240 "10s" blogs (ages 13-17)
 * 8086 "20s" blogs(ages 23-27)
-* 2994 "30s" blogs (ages 33-47).
+* 2994 "30s" blogs (ages 33-47)
 
 For each age group there are an equal number of male and female bloggers.   
 
@@ -23,3 +24,5 @@ Download Corpus: http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip
 * [scikit-learn](http://scikit-learn.org)
 * [pandas](https://pandas.pydata.org)
 * [joblib](https://pypi.python.org/pypi/joblib)
+* [nltk](https://pypi.python.org/pypi/nltk)
+* [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
