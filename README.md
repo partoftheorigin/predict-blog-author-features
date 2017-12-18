@@ -1,4 +1,4 @@
-# Contextual Classification of Short Text
+# Contextual Classification of Long & Short Text
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
 ## Algorithms
