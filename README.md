@@ -1,6 +1,11 @@
 # Contextual Classification of Long & Short Text
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
+# Pretrained Model for Long Text Classification
+Predicts text label for long paragraph of text, 
+Prepare features(vector) on this dataset from existing functions and use the model for label prediction, model is trained on MultinomialNB.
+Download Link: https://www.dropbox.com/s/109c4ccx9fjkebc/text_class_model?dl=0
+
 ## Algorithms
 * [Multinomial Naive Bayes](http://scikit-learn.org/stable/modules/naive_bayes.html#naive-bayes)
 * [Logistic Regression](http://scikit-learn.org/stable/modules/linear_model.html#logistic-regression)
