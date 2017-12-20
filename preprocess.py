@@ -59,3 +59,10 @@ def process_data_long_text(folder_path):
     # Save DataFrame
     df.to_csv('Data/blogdata_long.csv')
     return df
+
+
+if __name__ == "__main__":
+    # Folder containing The Blog Authorship Corpus
+    folder_path = "/Users/machine/Documents/Datasets/blogs"
+    process_data_long_text(folder_path)
+    process_data_short_text(folder_path)
