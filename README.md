@@ -1,4 +1,6 @@
 # Contextual Classification of Long & Short Text
+https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text.svg?branch=master
+
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
 ## Pretrained Model for Long Text Classification
