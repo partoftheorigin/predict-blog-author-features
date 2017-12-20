@@ -7,3 +7,5 @@ install:
   - pip3 install joblib
   - pip3 install nltk
   - pip3 install bs4
+script:
+  - python3 preprocess.py
