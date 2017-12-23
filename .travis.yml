@@ -2,6 +2,7 @@ language: python
 python:
   - "3.6"
 install:
+  - travis_wait
   - pip3 install requests
   - pip3 install bs4
   - pip3 install lxml
@@ -11,5 +12,5 @@ install:
   - pip3 install joblib
   - pip3 install nltk
 script:
-  - python3 preprocess.py
-  - python3 text_classification.py
+  - travis_wait 60 python3 preprocess.py
+  - travis_wait 60 python3 text_classification.py
