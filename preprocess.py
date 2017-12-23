@@ -82,13 +82,3 @@ def process_data_long_text(folder_path):
     # Save DataFrame
     df.to_csv('blogdata_long_text.csv')
     print('Data processed & saved as {}/blogdata_long_text.csv'.format(os.getcwd()))
-
-
-if __name__ == "__main__":
-    url = 'http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip'         # The Blog Authorship Corpus data set url
-    download_dataset(url)                                           # Downloads the data set and saves it locally
-    # Folder containing The Blog Authorship Corpus
-    folder_path = os.getcwd() + '/Dataset/blogs'
-    process_data_long_text(folder_path)
-    process_data_short_text(folder_path)
-    print('Program Executed!')

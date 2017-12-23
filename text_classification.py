@@ -1,4 +1,5 @@
 import re
+import os
 import pandas as pd
 import pickle, joblib
 from sklearn.svm import SVC, NuSVC, LinearSVC
@@ -7,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.naive_bayes import MultinomialNB, BernoulliNB
 from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
+from preprocess import download_dataset, process_data_short_text, process_data_long_text
 
 
 def create_vector(df, vectorizer):
@@ -63,6 +65,18 @@ def accuracy(prediction, column):
 
 
 if __name__ == "__main__":
+    # The Blog Authorship Corpus data set url
+    url = 'http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip'
+
+    # Downloads the data set and saves it locally
+    download_dataset(url)
+
+    # Folder containing The Blog Authorship Corpus
+    folder_path = os.getcwd() + '/Dataset/blogs'
+
+    process_data_long_text(folder_path)
+    process_data_short_text(folder_path)
+
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
