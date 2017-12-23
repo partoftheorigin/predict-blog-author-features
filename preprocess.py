@@ -8,6 +8,7 @@ from bs4 import BeautifulSoup
 import nltk
 nltk.download('stopwords')
 
+
 def download_dataset(url):
     print('Downloading The Blog Authorship Corpus...')
     r = requests.get(url)
