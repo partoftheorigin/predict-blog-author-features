@@ -1,6 +1,6 @@
 # Contextual Classification of Long & Short Text
 
-[![Build Status](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text.svg?branch=master)](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text)
+[![Build Status](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text.svg?branch=master)](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text) [![Coverage Status](https://coveralls.io/repos/github/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text/badge.svg?branch=master)](https://coveralls.io/github/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text?branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](README.md#pull-requests)
 
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
@@ -52,3 +52,6 @@ Download Corpus: http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip
 * [joblib](https://pypi.python.org/pypi/joblib)
 * [nltk](https://pypi.python.org/pypi/nltk)
 * [BeautifulSoup](https://www.crummy.com/software/BeautifulSoup/bs4/doc/)
+
+## Pull requests
+We hope that other people can benefit from the project. We are thankful for any contributions from the community.
