@@ -63,6 +63,7 @@ def process_data_long_text(folder_path):
 
 if __name__ == "__main__":
     # Folder containing The Blog Authorship Corpus
-    folder_path = "/Users/machine/Documents/Datasets/blogs"
+    # folder_path = "/Users/machine/Documents/Datasets/blogs"
+    folder_path = input('Enter folder path: ')
     process_data_long_text(folder_path)
     process_data_short_text(folder_path)
