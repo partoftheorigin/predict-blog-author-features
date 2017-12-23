@@ -9,56 +9,57 @@ from sklearn.linear_model import LogisticRegression, SGDClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer, CountVectorizer
 
 
-def create_vector(df, name='cv'):
+def create_vector(df, vectorizer):
     # tf = Convert a collection of raw documents to a matrix of TF-IDF features.
     # cv = Convert a collection of text documents to a matrix of token counts
 
-    if name == 'cv': vt = CountVectorizer(max_features=5000, stop_words='english')
-    elif name == 'tf': vt = TfidfVectorizer(max_features=5000, stop_words='english')
+    if vectorizer == 'cv': vt = CountVectorizer(max_features=5000, stop_words='english')
+    elif vectorizer == 'tf': vt = TfidfVectorizer(max_features=5000, stop_words='english')
 
     # cv.fit_transform() = Learn the vocabulary dictionary and return term-document matrix.
     # tf.fit_transform() = Learn vocabulary and idf, return term-document matrix.
-    vector = vt.fit_transform(df.iloc[0:, 2].values).toarray()
+    vector = vt.fit_transform(df.iloc[0:, 1].values).toarray()
 
-    # pickle.dump(vt, open("Data/{}_vt.pkl".format(name), 'wb'))
-    # joblib.dump(vector, open("Data/{}_vector.pkl".format(name), 'wb'))
+    # pickle.dump(vt, open("Data/{}_vt.pkl".format(vectorizer), 'wb'))
+    # joblib.dump(vector, open("Data/{}_vector.pkl".format(vectorizer), 'wb'))
 
     print('Vector returned.')
     return vt, vector
 
 
-def classify(vector, df, name='mnb', col_num=1):
-    if name == 'mnb':
+def classify(vector, df, algorithm, column):
+    if algorithm == 'mnb':
         clf = MultinomialNB()
-    elif name == 'bnb':
+    elif algorithm == 'bnb':
         clf = BernoulliNB()
-    elif name == 'svc':
+    elif algorithm == 'svc':
         clf = SVC()
-    elif name == 'nvc':
+    elif algorithm == 'nvc':
         clf = NuSVC()
-    elif name == 'lvc':
+    elif algorithm == 'lvc':
         clf = LinearSVC()
-    elif name == 'lgr':
+    elif algorithm == 'lgr':
         clf = LogisticRegression()
-    elif name == 'sgd':
+    elif algorithm == 'sgd':
         clf = SGDClassifier()
-    elif name == 'rnf':
+    elif algorithm == 'rnf':
         clf = RandomForestClassifier(n_estimators=100)
 
-    classifier = clf.fit(vector, df.iloc[0:, col_num].values)     # Fit classifier according to vector and input array.
+    # Fit classifier according to vector and input array.
+    classifier = clf.fit(vector, df.iloc[0:, column].values)
 
-    # pickle.dump(classifier, open("Data/{}_classifier_{}.pkl".format(name, col_num), 'wb'))
+    # pickle.dump(classifier, open("Data/{}_classifier_{}.pkl".format(algorithm, column), 'wb'))
 
     return classifier
 
 
-def accuracy(prediction, col_num=1):
+def accuracy(prediction, column):
     l = list()
     for i in range(0, len(prediction)):
-        if test.iloc[i, col_num] == prediction[i]: l.append(1)
+        if test.iloc[i, column] == prediction[i]: l.append(1)
         else: l.append(0)
-    acc_precentage = ((l.count(1)) / len(prediction)) * 100
-    return acc_precentage
+    accuracy_percentage = ((l.count(1)) / len(prediction)) * 100
+    return accuracy_percentage
 
 
 if __name__ == "__main__":
@@ -66,28 +67,36 @@ if __name__ == "__main__":
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
     for d in ['short', 'long']:
-        df = pd.read_csv('/blogdata_{}_text.csv'.format(d))
+        df = pd.read_csv('processed_data/blogdata_{}_text.csv'.format(d))
         # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
-        train, test = train_test_split(df, test_size=0.15)      # Split data into training and testing
-        train = train.sample(frac=0.9, replace=True)            # Shuffle train data
+        # Split data into training and testing
+        train, test = train_test_split(df, test_size=0.15)
 
-        vt, vector = create_vector(train, name='cv')            # Convert into vectors to make computer understand
+        # Shuffle train data
+        train = train.sample(frac=0.9, replace=True)
 
-        # vt = pickle.load(open('Data/vttf.pkl', 'rb'))         # load vt from storage if already pickled
-        # vector = joblib.load(open('Data/vectortf.pkl', 'rb')) # load vector from storage if already pickled
+        # Convert into vectors to make computer understand
+        vt, vector = create_vector(train, vectorizer='cv')
+
+        # load vt from storage if already pickled
+        # vt = pickle.load(open('Data/vttf.pkl', 'rb'))
+
+        # load vector from storage if already pickled
+        # vector = joblib.load(open('Data/vectortf.pkl', 'rb'))
 
         # test_vector = vt.transform(clean_text)
-        test_vector = vt.transform(test.iloc[0:, 2].values)   # Vector to test the model
 
-        for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [1, 3, 4, 5], ['mnb', 'mnb', 'mnb', 'mnb']):
-            # Column Numbers: 1= Label, 3=Gender, 4=Age, 5=Zodiac
+        # Vector to test the model
+        test_vector = vt.transform(test.iloc[0:, 1].values)
 
-            model = classify(vector, train, name=algo, col_num=i)
+        for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [0, 2, 3, 4], ['mnb', 'mnb', 'mnb', 'mnb']):
+            # Column Numbers: 0= Label, 2=Gender, 3=Age, 4=Zodiac
+
+            model = classify(vector, train, algorithm=algo, column=i)
             prediction = model.predict(test_vector)
-            accuracy_precentage = accuracy(prediction, col_num=i)
+            accuracy_percentage = accuracy(prediction, column=i)
 
-            print('-----Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, \
-                    max(set(prediction), key=prediction.tolist().count), accuracy_precentage, algo))
+            print('-----Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, max(set(prediction), key=prediction.tolist().count), accuracy_percentage, algo))
 
     print('Program executed!')

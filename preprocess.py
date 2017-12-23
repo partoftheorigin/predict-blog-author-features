@@ -28,28 +28,34 @@ def process_data_short_text(folder_path):
         # Beautiful soup to parse the xml files
         blog = BeautifulSoup(codecs.open(folder_path + '/' + filename, encoding='utf-8', errors='ignore'), "lxml")
 
-        for post in blog.find_all('post'):                  # Finds <post> tags inside xml
-            post_text = post.get_text()                     # Fetches text inside <post> tags
+        # Finds <post> tags inside xml
+        for post in blog.find_all('post'):
+
+            # Fetches text inside <post> tags
+            post_text = post.get_text()
             post_text = re.sub('[^A-Za-z]+', ' ', post_text).strip().lower().split()
 
-            stop_words = set(stopwords.words('english'))    # Stopwords to remove from post text.
+            # Stopwords to remove from post text.
+            stop_words = set(stopwords.words('english'))
             post_text = [word for word in post_text if word not in stop_words]
-            post_text = ' '.join(post_text)                 # Converts the list back to string.
+
+            # Converts the list back to string.
+            post_text = ' '.join(post_text)
 
             if len(post_text) > 0:
                 df = df.append({'label': labels[2], 'text': post_text, 'gender': labels[0], 'age': labels[1], 'zodiac': labels[3]}, ignore_index=True)
 
     # Write DataFrame to csv
-    df.to_csv(os.getcwd() + '/blogdata_short_text.csv')
-    print(df.head())
-    print(df.iloc[0:, 2].values)
-    print('Data processed & saved as {}/blogdata_short_text.csv'.format(os.getcwd()))
+    df.to_csv('processed_data/blogdata_short_text.csv')
+    print('Data processed & saved as {}/processed_data/blogdata_short_text.csv'.format(os.getcwd()))
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for long text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.
 def process_data_long_text(folder_path):
     print('Processing data for long text...')
-    df = pd.DataFrame(columns=['label', 'text', 'gender', 'age', 'zodiac'])  # Empty DataFrame
+
+    # Empty DataFrame
+    df = pd.DataFrame(columns=['label', 'text', 'gender', 'age', 'zodiac'])
 
     # Unique File Names
     for f in os.listdir(folder_path):
@@ -73,10 +79,8 @@ def process_data_long_text(folder_path):
         df = df.append({'label': ds_label, 'text': post_text, 'gender': ds_gender, 'age': ds_age, 'zodiac': ds_zodiac},ignore_index=True)
 
     # Save DataFrame
-    df.to_csv(os.getcwd() + '/blogdata_long_text.csv')
-    print(df.head())
-    print(df.iloc[0:, 2].values)
-    print('Data processed & saved as {}/blogdata_long_text.csv'.format(os.getcwd()))
+    df.to_csv('processed_data/blogdata_long_text.csv')
+    print('Data processed & saved as {}/processed_data/blogdata_long_text.csv'.format(os.getcwd()))
 
 
 if __name__ == "__main__":
