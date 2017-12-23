@@ -33,18 +33,13 @@ def process_data_short_text(folder_path):
         for post in blog.find_all('post'):
 
             # Fetches text inside <post> tags
-            post_text = post.get_text()
+            post_text = post.text
             post_text = re.sub('[^A-Za-z]+', ' ', post_text).strip().lower().split()
-
-            # Stopwords to remove from post text.
-            stop_words = set(stopwords.words('english'))
+            stop_words = set(stopwords.words('english'))  # Stopwords to remove from post text.
             post_text = [word for word in post_text if word not in stop_words]
+            post_text = ' '.join(post_text)  # Converts the list back to string.
 
-            # Converts the list back to string.
-            post_text = ' '.join(post_text)
-
-            if len(post_text) > 0:
-                df = df.append({'label': labels[2], 'text': post_text, 'gender': labels[0], 'age': labels[1], 'zodiac': labels[3]}, ignore_index=True)
+            df = df.append({'label': labels[2], 'text': post_text, 'gender': labels[0], 'age': labels[1], 'zodiac': labels[3]}, ignore_index=True)
 
     # Write DataFrame to csv
     df.to_csv('blogdata_short_text.csv')
