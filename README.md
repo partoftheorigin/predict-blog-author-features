@@ -1,6 +1,6 @@
 # Contextual Classification of Long & Short Text
 
-[![Build Status](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text.svg?branch=master)](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text)
+[![Build Status](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text.svg?branch=master)](https://travis-ci.org/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text) [![Coverage Status](https://coveralls.io/repos/github/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text/badge.svg?branch=master)](https://coveralls.io/github/partoftheorigin/Contextual_Classification_of_Long_and_Short_Text?branch=master)
 
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
