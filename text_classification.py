@@ -62,32 +62,32 @@ def accuracy(prediction, col_num=1):
 
 
 if __name__ == "__main__":
-    raw_text = input('Enter or paste text to get predictions: ')
-    clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
+    # raw_text = input('Enter or paste text to get predictions: ')
+    # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
-    # Either use long or short
-    df = pd.read_csv('Data/blogdata_long.csv')
-    # df = pd.read_csv('Data/blogdata_short.csv')
+    for d in ['short', 'long']:
+        df = pd.read_csv('/preprocessed_data/blogdata_{}_text.csv'.format(d))
+        # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
-    train, test = train_test_split(df, test_size=0.15)      # Split data into training and testing
-    train = train.sample(frac=0.9, replace=True)            # Shuffle train data
+        train, test = train_test_split(df, test_size=0.15)      # Split data into training and testing
+        train = train.sample(frac=0.9, replace=True)            # Shuffle train data
 
-    vt, vector = create_vector(train, name='cv')            # Convert into vectors to make computer understand
+        vt, vector = create_vector(train, name='cv')            # Convert into vectors to make computer understand
 
-    # vt = pickle.load(open('Data/vttf.pkl', 'rb'))         # load vt from storage if already pickled
-    # vector = joblib.load(open('Data/vectortf.pkl', 'rb')) # load vector from storage if already pickled
+        # vt = pickle.load(open('Data/vttf.pkl', 'rb'))         # load vt from storage if already pickled
+        # vector = joblib.load(open('Data/vectortf.pkl', 'rb')) # load vector from storage if already pickled
 
-    test_vector = vt.transform(clean_text)
-    # test_vector = vt.transform(test.iloc[0:, 2].values)   # Vector to test the model
+        # test_vector = vt.transform(clean_text)
+        test_vector = vt.transform(test.iloc[0:, 2].values)   # Vector to test the model
 
-    for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [1, 3, 4, 5], ['mnb', 'mnb', 'mnb', 'mnb']):
-        # Column Numbers: 1= Label, 3=Gender, 4=Age, 5=Zodiac
+        for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [1, 3, 4, 5], ['mnb', 'mnb', 'mnb', 'mnb']):
+            # Column Numbers: 1= Label, 3=Gender, 4=Age, 5=Zodiac
 
-        model = classify(vector, train, name=algo, col_num=i)
-        prediction = model.predict(test_vector)
-        accuracy_precentage = accuracy(prediction, col_num=i)
+            model = classify(vector, train, name=algo, col_num=i)
+            prediction = model.predict(test_vector)
+            accuracy_precentage = accuracy(prediction, col_num=i)
 
-        print('Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, \
-                max(set(prediction), key=prediction.tolist().count), accuracy_precentage, algo))
+            print('-----Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, \
+                    max(set(prediction), key=prediction.tolist().count), accuracy_precentage, algo))
 
     print('Program executed!')

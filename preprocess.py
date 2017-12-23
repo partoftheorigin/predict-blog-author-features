@@ -36,9 +36,11 @@ def process_data_short_text(folder_path):
             if len(post_text) > 0:
                 df = df.append({'label': labels[2], 'text': post_text, 'gender': labels[0], 'age': labels[1], 'zodiac': labels[3]}, ignore_index=True)
 
-    df.to_csv(os.getcwd() + '/preprocessed_data/blogdata_short_text.csv')                    # Write DataFrame to csv
+    # Write DataFrame to csv
+    df.to_csv(os.getcwd() + '/preprocessed_data/blogdata_short_text.csv')
+    print(df.head())
+    print(df.iloc[0:, 2].values)
     print('Data processed & saved as {}/preprocessed_data/blogdata_short_text.csv'.format(os.getcwd()))
-    return df
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for long text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.
@@ -69,8 +71,9 @@ def process_data_long_text(folder_path):
 
     # Save DataFrame
     df.to_csv(os.getcwd() + '/preprocessed_data/blogdata_long_text.csv')
+    print(df.head())
+    print(df.iloc[0:, 2].values)
     print('Data processed & saved as {}/preprocessed_data/blogdata_long_text.csv'.format(os.getcwd()))
-    return df
 
 
 if __name__ == "__main__":
@@ -80,3 +83,4 @@ if __name__ == "__main__":
     folder_path = os.getcwd() + '/Dataset/blogs'
     process_data_long_text(folder_path)
     process_data_short_text(folder_path)
+    print('Program Executed!')
