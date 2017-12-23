@@ -80,7 +80,7 @@ if __name__ == "__main__":
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
-    df = pd.read_csv('blogdata_long_text.csv'.format(d))
+    df = pd.read_csv('blogdata_long_text.csv')
     # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
     # Split data into training and testing
