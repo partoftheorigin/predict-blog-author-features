@@ -74,8 +74,8 @@ if __name__ == "__main__":
     # Folder containing The Blog Authorship Corpus
     folder_path = os.getcwd() + '/Dataset/blogs'
 
-    process_data_long_text(folder_path)
     process_data_short_text(folder_path)
+    process_data_long_text(folder_path)
 
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
