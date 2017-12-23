@@ -6,13 +6,16 @@ from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
 
 def download_dataset(url):
+    print('Downloading The Blog Authorship Corpus...')
     r = requests.get(url)
     z = zipfile.ZipFile(io.BytesIO(r.content))
     z.extractall(os.getcwd() + '/Dataset')
+    print('Dataset downloaded & saved in {}/Dataset'.format(os.getcwd()))
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for Short text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.
 def process_data_short_text(folder_path):
+    print('Processing data for short text...')
     df = pd.DataFrame(columns=['label', 'text', 'gender', 'age', 'zodiac'])     # Empty DataFrame
     for filename in os.listdir(folder_path):
 
@@ -33,12 +36,14 @@ def process_data_short_text(folder_path):
             if len(post_text) > 0:
                 df = df.append({'label': labels[2], 'text': post_text, 'gender': labels[0], 'age': labels[1], 'zodiac': labels[3]}, ignore_index=True)
 
-    df.to_csv(os.getcwd() + 'preprocessed_data/blogdata_short_text.csv')                    # Write DataFrame to csv
+    df.to_csv(os.getcwd() + '/preprocessed_data/blogdata_short_text.csv')                    # Write DataFrame to csv
+    print('Data processed & saved as {}/preprocessed_data/blogdata_short_text.csv'.format(os.getcwd()))
     return df
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for long text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.
 def process_data_long_text(folder_path):
+    print('Processing data for long text...')
     df = pd.DataFrame(columns=['label', 'text', 'gender', 'age', 'zodiac'])  # Empty DataFrame
 
     # Unique File Names
@@ -63,7 +68,8 @@ def process_data_long_text(folder_path):
         df = df.append({'label': ds_label, 'text': post_text, 'gender': ds_gender, 'age': ds_age, 'zodiac': ds_zodiac},ignore_index=True)
 
     # Save DataFrame
-    df.to_csv(os.getcwd() + 'preprocessed_data/blogdata_long_text.csv')
+    df.to_csv(os.getcwd() + '/preprocessed_data/blogdata_long_text.csv')
+    print('Data processed & saved as {}/preprocessed_data/blogdata_long_text.csv'.format(os.getcwd()))
     return df
 
 
@@ -71,6 +77,6 @@ if __name__ == "__main__":
     url = 'http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip'         # The Blog Authorship Corpus data set url
     download_dataset(url)                                           # Downloads the data set and saves it locally
     # Folder containing The Blog Authorship Corpus
-    folder_path = os.getcwd() + 'Dataset/blogs'
+    folder_path = os.getcwd() + '/Dataset/blogs'
     process_data_long_text(folder_path)
     process_data_short_text(folder_path)
