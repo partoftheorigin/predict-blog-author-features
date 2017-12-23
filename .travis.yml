@@ -11,5 +11,5 @@ install:
   - pip3 install joblib
   - pip3 install nltk
 script:
-  - travis_wait 60 python3 preprocess.py
-  - travis_wait 60 python3 text_classification.py
+  - python3 preprocess.py
+  - python3 text_classification.py
