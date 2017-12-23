@@ -1,5 +1,6 @@
 import os
 import re
+import codecs
 import pandas as pd
 import requests, zipfile, io
 from nltk.corpus import stopwords
