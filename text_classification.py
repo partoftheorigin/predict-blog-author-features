@@ -66,7 +66,7 @@ if __name__ == "__main__":
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
     for d in ['short', 'long']:
-        df = pd.read_csv('/preprocessed_data/blogdata_{}_text.csv'.format(d))
+        df = pd.read_csv('/blogdata_{}_text.csv'.format(d))
         # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
         train, test = train_test_split(df, test_size=0.15)      # Split data into training and testing
