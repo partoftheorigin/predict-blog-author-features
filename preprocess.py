@@ -59,7 +59,7 @@ def process_data_long_text(folder_path):
         ds_label = f.split('.')[3].lower()
         ds_zodiac = f.split('.')[4].lower()
 
-        blog_file = BeautifulSoup(codecs.open(folder_path + '/' + filename, encoding='utf-8', errors='ignore'), "lxml")
+        blog_file = BeautifulSoup(codecs.open(folder_path + '/' + f, encoding='utf-8', errors='ignore'), "lxml")
 
         pk = ''
         for post in blog_file.find_all('post'):
