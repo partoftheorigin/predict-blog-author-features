@@ -16,6 +16,7 @@ def download_dataset(url):
     z.extractall(os.getcwd() + '/Dataset')
     print('Dataset downloaded & saved in {}/Dataset'.format(os.getcwd()))
 
+
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for Short text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.
 def process_data_short_text(folder_path):
@@ -44,6 +45,7 @@ def process_data_short_text(folder_path):
     # Write DataFrame to csv
     df.to_csv('blogdata_short_text.csv')
     print('Data processed & saved as {}/blogdata_short_text.csv'.format(os.getcwd()))
+
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for long text based classification.
 # Processes the post text, removes stopwords, returns a pandas DataFrame containing label, text, gender, age, zodiac.

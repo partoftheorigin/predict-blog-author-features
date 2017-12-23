@@ -74,43 +74,42 @@ if __name__ == "__main__":
     # Folder containing The Blog Authorship Corpus
     folder_path = os.getcwd() + '/Dataset/blogs'
 
-    process_data_short_text(folder_path)
+    # process_data_short_text(folder_path)
     process_data_long_text(folder_path)
 
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
-    for d in ['short', 'long']:
-        df = pd.read_csv('blogdata_{}_text.csv'.format(d))
-        # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
+    df = pd.read_csv('blogdata_long_text.csv'.format(d))
+    # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
-        # Split data into training and testing
-        train, test = train_test_split(df, test_size=0.15)
+    # Split data into training and testing
+    train, test = train_test_split(df, test_size=0.15)
 
-        # Shuffle train data
-        train = train.sample(frac=0.9, replace=True)
+    # Shuffle train data
+    train = train.sample(frac=0.9, replace=True)
 
-        # Convert into vectors to make computer understand
-        vt, vector = create_vector(train, vectorizer='cv')
+    # Convert into vectors to make computer understand
+    vt, vector = create_vector(train, vectorizer='cv')
 
-        # load vt from storage if already pickled
-        # vt = pickle.load(open('Data/vttf.pkl', 'rb'))
+    # load vt from storage if already pickled
+    # vt = pickle.load(open('Data/vttf.pkl', 'rb'))
 
-        # load vector from storage if already pickled
-        # vector = joblib.load(open('Data/vectortf.pkl', 'rb'))
+    # load vector from storage if already pickled
+    # vector = joblib.load(open('Data/vectortf.pkl', 'rb'))
 
-        # test_vector = vt.transform(clean_text)
+    # test_vector = vt.transform(clean_text)
 
-        # Vector to test the model
-        test_vector = vt.transform(test.iloc[0:, 1].values)
+    # Vector to test the model
+    test_vector = vt.transform(test.iloc[0:, 1].values)
 
-        for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [0, 2, 3, 4], ['mnb', 'mnb', 'mnb', 'mnb']):
-            # Column Numbers: 0= Label, 2=Gender, 3=Age, 4=Zodiac
+    for col_name, i, algo in zip(['Label', 'Gender', 'Age', 'Zodiac'], [0, 2, 3, 4], ['mnb', 'mnb', 'mnb', 'mnb']):
+        # Column Numbers: 0= Label, 2=Gender, 3=Age, 4=Zodiac
 
-            model = classify(vector, train, algorithm=algo, column=i)
-            prediction = model.predict(test_vector)
-            accuracy_percentage = accuracy(prediction, column=i)
+        model = classify(vector, train, algorithm=algo, column=i)
+        prediction = model.predict(test_vector)
+        accuracy_percentage = accuracy(prediction, column=i)
 
-            print('-----Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, max(set(prediction), key=prediction.tolist().count), accuracy_percentage, algo))
+        print('-----Author Info Prediction - {}: {}, Accuracy: {}, Algorithm: {}'.format(col_name, max(set(prediction), key=prediction.tolist().count), accuracy_percentage, algo))
 
     print('Program executed!')
