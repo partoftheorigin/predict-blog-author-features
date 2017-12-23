@@ -1,7 +1,8 @@
 language: python
 python:
-  - "3.6"
+  - "3.6"url =
 install:
+  - pip3 install requests
   - pip3 install pandas
   - pip3 install sklearn
   - pip3 install joblib
