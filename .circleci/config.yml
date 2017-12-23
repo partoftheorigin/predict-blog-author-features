@@ -44,7 +44,7 @@ jobs:
           name: run tests
           command: |
             . venv/bin/activate
-            python3 test_classification.py
+            python3 text_classification.py
 
       - store_artifacts:
           path: test-reports
