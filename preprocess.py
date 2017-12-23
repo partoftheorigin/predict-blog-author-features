@@ -4,6 +4,8 @@ import pandas as pd
 import requests, zipfile, io
 from nltk.corpus import stopwords
 from bs4 import BeautifulSoup
+import nltk
+nltk.download('stopwords')
 
 def download_dataset(url):
     print('Downloading The Blog Authorship Corpus...')
