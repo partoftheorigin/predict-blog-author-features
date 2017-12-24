@@ -80,11 +80,11 @@ if __name__ == "__main__":
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
 
-    df = pd.read_csv('blogdata_long_text.csv')
+    # df = pd.read_csv('blogdata_long_text.csv')
     # df = pd.read_csv('/preprocessed_data/blogdata_short_text.csv')
 
     # Split data into training and testing
-    train, test = train_test_split(df, test_size=0.15)
+    train, test = train_test_split(pd.read_csv('blogdata_long_text.csv'), test_size=0.15)
 
     # Shuffle train data
     train = train.sample(frac=0.9, replace=True)
