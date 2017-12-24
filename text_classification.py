@@ -15,7 +15,7 @@ def create_vector(df, vectorizer):
     # tf = Convert a collection of raw documents to a matrix of TF-IDF features.
     # cv = Convert a collection of text documents to a matrix of token counts
 
-    if vectorizer == 'cv': vt = CountVectorizer(max_features=500, stop_words='english')
+    if vectorizer == 'cv': vt = CountVectorizer(max_features=50, stop_words='english')
     elif vectorizer == 'tf': vt = TfidfVectorizer(max_features=500, stop_words='english')
 
     # cv.fit_transform() = Learn the vocabulary dictionary and return term-document matrix.
