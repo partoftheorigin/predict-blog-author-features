@@ -22,11 +22,11 @@ def create_vector(df, vectorizer):
     # tf.fit_transform() = Learn vocabulary and idf, return term-document matrix.
     vector = vt.fit_transform(df.iloc[0:, 1].values).toarray()
 
-    # pickle.dump(vt, open("Data/{}_vt.pkl".format(vectorizer), 'wb'))
-    # joblib.dump(vector, open("Data/{}_vector.pkl".format(vectorizer), 'wb'))
+    pickle.dump(vt, open("{}_vt.pkl".format(vectorizer), 'wb'))
+    joblib.dump(vector, open("{}_vector.pkl".format(vectorizer), 'wb'))
 
     print('Vector returned.')
-    return vt, vector
+    # return vt, vector
 
 
 def classify(vector, df, algorithm, column):
@@ -90,13 +90,13 @@ if __name__ == "__main__":
     train = train.sample(frac=0.9, replace=True)
 
     # Convert into vectors to make computer understand
-    vt, vector = create_vector(train, vectorizer='cv')
+    create_vector(train, vectorizer='cv')
 
     # load vt from storage if already pickled
-    # vt = pickle.load(open('Data/vttf.pkl', 'rb'))
+    vt = pickle.load(open('cv_vt.pkl', 'rb'))
 
     # load vector from storage if already pickled
-    # vector = joblib.load(open('Data/vectortf.pkl', 'rb'))
+    vector = joblib.load(open('cv_vector.pkl', 'rb'))
 
     # test_vector = vt.transform(clean_text)
 
