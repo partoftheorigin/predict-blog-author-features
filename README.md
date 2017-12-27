@@ -1,6 +1,7 @@
 # Contextual Classification of Long & Short Text
 
-[![Build Status](https://travis-ci.org/partoftheorigin/foretell.svg?branch=master)](https://travis-ci.org/partoftheorigin/foretell) [![Coverage Status](https://coveralls.io/repos/github/partoftheorigin/foretell/badge.svg?branch=master)](https://coveralls.io/github/partoftheorigin/foretell?branch=master) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](README.md#pull-requests)
+[![Build Status](https://travis-ci.org/partoftheorigin/foretell.svg?branch=master)](https://travis-ci.org/partoftheorigin/foretell)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](README.md#pull-requests)
 
 Predicts gender, age, label, and zodiac sign of the author from the given text.
 
