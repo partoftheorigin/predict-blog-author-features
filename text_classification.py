@@ -15,8 +15,8 @@ def create_vector(df, vectorizer):
     # tf = Convert a collection of raw documents to a matrix of TF-IDF features.
     # cv = Convert a collection of text documents to a matrix of token counts
 
-    if vectorizer == 'cv': vt = CountVectorizer(max_features=50, stop_words='english')
-    elif vectorizer == 'tf': vt = TfidfVectorizer(max_features=500, stop_words='english')
+    if vectorizer == 'cv': vt = CountVectorizer(max_features=10)
+    elif vectorizer == 'tf': vt = TfidfVectorizer(max_features=500)
 
     # cv.fit_transform() = Learn the vocabulary dictionary and return term-document matrix.
     # tf.fit_transform() = Learn vocabulary and idf, return term-document matrix.
@@ -26,7 +26,7 @@ def create_vector(df, vectorizer):
     joblib.dump(vector, open("{}_vector.pkl".format(vectorizer), 'wb'))
 
     print('Vector returned.')
-    # return vt, vector
+    return vt, vector
 
 
 def classify(vector, df, algorithm, column):
@@ -65,17 +65,6 @@ def accuracy(prediction, column):
 
 
 if __name__ == "__main__":
-    # The Blog Authorship Corpus data set url
-    url = 'http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip'
-
-    # Downloads the data set and saves it locally
-    download_dataset(url)
-
-    # Folder containing The Blog Authorship Corpus
-    folder_path = os.getcwd() + '/Dataset/blogs'
-
-    # process_data_short_text(folder_path)
-    process_data_long_text(folder_path)
 
     # raw_text = input('Enter or paste text to get predictions: ')
     # clean_text = words = re.sub('[^A-Za-z]+', ' ', raw_text).strip().lower().split()
@@ -90,13 +79,13 @@ if __name__ == "__main__":
     train = train.sample(frac=0.9, replace=True)
 
     # Convert into vectors to make computer understand
-    create_vector(train, vectorizer='cv')
+    vt, vector = create_vector(train, vectorizer='cv')
 
     # load vt from storage if already pickled
-    vt = pickle.load(open('cv_vt.pkl', 'rb'))
+    # vt = pickle.load(open('cv_vt.pkl', 'rb'))
 
     # load vector from storage if already pickled
-    vector = joblib.load(open('cv_vector.pkl', 'rb'))
+    # vector = joblib.load(open('cv_vector.pkl', 'rb'))
 
     # test_vector = vt.transform(clean_text)
 

@@ -44,7 +44,7 @@ def process_data_short_text(folder_path):
 
     # Write DataFrame to csv
     df.to_csv('blogdata_short_text.csv')
-    print('Data processed & saved as {}/blogdata_short_text.csv'.format(os.getcwd()))
+    return print('Data processed & saved as {}/blogdata_short_text.csv'.format(os.getcwd()))
 
 
 # Filters the text inside the post tag in xml files and extracts the labels out of xml file name for long text based classification.
@@ -78,4 +78,18 @@ def process_data_long_text(folder_path):
 
     # Save DataFrame
     df.to_csv('blogdata_long_text.csv')
-    print('Data processed & saved as {}/blogdata_long_text.csv'.format(os.getcwd()))
+    return print('Data processed & saved as {}/blogdata_long_text.csv'.format(os.getcwd()))
+
+
+if __name__ == "__main__":
+    # The Blog Authorship Corpus data set url
+    url = 'http://www.cs.biu.ac.il/~koppel/blogs/blogs.zip'
+
+    # Downloads the data set and saves it locally
+    download_dataset(url)
+
+    # Folder containing The Blog Authorship Corpus
+    folder_path = os.getcwd() + '/Dataset/blogs'
+
+    # process_data_short_text(folder_path)
+    process_data_long_text(folder_path)
