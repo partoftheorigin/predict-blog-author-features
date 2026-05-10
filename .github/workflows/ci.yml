@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.6'
+      - run: travis_wait
+      - run: pip3 install requests
+      - run: pip3 install bs4
+      - run: pip3 install lxml
+      - run: pip3 install pandas
+      - run: pip3 install sklearn
+      - run: pip3 install scipy
+      - run: pip3 install joblib
+      - run: pip3 install nltk
+      - run: python3 preprocess.py
